@@ -1,9 +1,10 @@
-from django.urls import path
+from django.conf.urls import url
 from . import views
-from .views import BlogListView, BlogDetailView
- 
+
 urlpatterns = [
-    path('post/<int:pk>/', BlogDetailView.as_view(), name='post_detail'),
-    path('', BlogListView.as_view(), name='home'),
-    path('about/', views.index, name='aboutblog'),
+    url(r'^$', views.post_list, name='post_list'),
+    url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/'\
+        r'(?P<post>[-\w]+)/$',
+        views.post_detail,
+        name='post_detail'),
 ]
