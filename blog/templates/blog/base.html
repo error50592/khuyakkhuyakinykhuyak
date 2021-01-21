@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}{% endblock %}</title>
+    
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="{% static 'css/blog.css' %}" rel="stylesheet">
     
@@ -18,10 +18,6 @@
 <div id="content">
     {% block content %}
     {% endblock %}
-</div>
-<div id="sidebar">
-    <h2>My blog</h2>
-    <p>This is my blog.</p>
 </div>
 </body>
 </html>
