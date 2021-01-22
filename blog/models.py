@@ -1,15 +1,12 @@
-
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from taggit.managers import TaggableManager
 
 
 class Post(models.Model):
-    STATUS_CHOICES = (
-        ('draft', 'Draft'),
-        ('published', 'Published'),
-    )
+    STATUS_CHOICES = ( ('draft', 'Draft'), ('published', 'Published'),)
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, unique_for_date='publish')
     author = models.ForeignKey(User, related_name='blog_posts',on_delete=models.CASCADE,)
@@ -18,7 +15,7 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
-    
+    tags = TaggableManager()
 
 class Meta:
     ordering = ('-publish',)
@@ -40,5 +37,4 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Comment by {} on {}'.format(self.name, self.post)
-from .models import Post, Comment
-from .forms import CommentForm
+
